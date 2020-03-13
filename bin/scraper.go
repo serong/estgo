@@ -3,8 +3,28 @@ package bin
 import (
 	"fmt"
 	"github.com/gocolly/colly"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"strings"
 )
+
+func GetTTS(phrase string) (rawMP3 []byte) {
+	url := fmt.Sprintf("https://translate.google.com/translate_tts?ie=UTF-8&tl=et&client=tw-ob&q=%s", phrase)
+
+	response, err := http.Get(url)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer response.Body.Close()
+
+	rawMP3, err = ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return rawMP3
+}
 
 func FetchForms(word string) (vocabulary Vocabulary) {
 	url := fmt.Sprintf("http://www.eki.ee/dict/psv/index.cgi?Q=%s&F=M", word)
