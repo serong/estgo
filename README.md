@@ -14,6 +14,9 @@ Some command line tool to scrape and fetch Estonian word data.
 
 # fetch definitions, related words and examples of a given word
 ./estgo def <word>
+
+# play TTS audio of a given word
+./estgo play <word>
 ```
 
 ![Fetch definitions](./screenshot_001.png)
