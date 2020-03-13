@@ -32,7 +32,7 @@ var formsCmd = &cobra.Command{
 			vocabulary := bin.FetchForms(args[0])
 			fmt.Println(">>>", vocabulary.Forms.String())
 		} else {
-			vocabularies := bin.FetchMultipleForms(bin.ParseWordsFile(args[0]))
+			vocabularies := bin.FetchMultipleForms(bin.ParseWordsFromFile(args[0]))
 
 			for _, vocabulary := range vocabularies {
 				fmt.Println(">>>", vocabulary.Forms.String())
