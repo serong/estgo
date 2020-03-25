@@ -70,6 +70,15 @@ func FetchDefinitions(word string) (voc Vocabulary) {
 		voc.word = voc.word + " - " + strings.ToUpper(element)
 	})
 
+	// Word itself
+	collector.OnHTML("span[class='lex_ful_morf']", func(e *colly.HTMLElement) {
+		element := strings.TrimSpace(e.Text)
+		if voc.wordType == "" {
+			voc.wordType = strings.ToLower(element)
+		}
+
+	})
+
 	// Definitions
 	collector.OnHTML("span[class='lex_ful_tran w l2']", func(e *colly.HTMLElement) {
 		element := strings.TrimSpace(e.Text)

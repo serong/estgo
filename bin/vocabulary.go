@@ -8,6 +8,7 @@ import (
 
 type Vocabulary struct {
 	word        string
+	wordType    string
 	definitions []string
 	examples    []string
 	related     []string
@@ -46,7 +47,8 @@ func (v Vocabulary) String() string {
 	fgGreen := color.New(color.FgGreen).SprintFunc()
 
 	// output = output + fgGreen(v.word + "\n")
-	output = output + fgGreen(AddUnderline(v.word, "="))
+	formattedWord := fmt.Sprintf("%s [%s]", v.word, v.wordType)
+	output = output + fgGreen(AddUnderline(formattedWord+"", "="))
 
 	output = output + fgRed(AddUnderline("Definitions:", "-"))
 	for ind, definition := range v.definitions {
